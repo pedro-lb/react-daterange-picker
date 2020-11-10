@@ -1,3 +1,4 @@
 {
-  "eslint.workingDirectories": ["./package/", "./example/"]
+  "eslint.workingDirectories": ["./package/", "./example/"],
+  "files.eol": "\n"
 }

@@ -5,7 +5,6 @@ import {
   IconButton,
   Typography,
   makeStyles,
-  // eslint-disable-next-line no-unused-vars
   Theme,
 } from '@material-ui/core';
 import { combine } from '../utils';

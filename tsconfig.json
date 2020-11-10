@@ -18,7 +18,29 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["./package/src"],
-  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"]
+  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"],
+  "eslintConfig": {
+    "extends": ["react-app"],
+    "rules": {
+      "@typescript-eslint/no-use-before-define": "off",
+      "@typescript-eslint/no-unused-vars": [
+        2,
+        {
+          "args": "none"
+        }
+      ]
+    },
+    "overrides": [
+      {
+        "files": ["**/*.ts?(x)"],
+        "rules": {
+          "@typescript-eslint/no-use-before-define": "off"
+        }
+      }
+    ]
+  }
 }

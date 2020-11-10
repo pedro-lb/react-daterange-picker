@@ -10,7 +10,6 @@ import {
   addMonths,
 } from 'date-fns';
 
-// eslint-disable-next-line no-unused-vars
 import { DefinedRange } from './types';
 
 const getDefaultRanges = (date: Date): DefinedRange[] => [

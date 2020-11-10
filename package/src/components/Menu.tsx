@@ -5,7 +5,6 @@ import {
   Typography,
   Divider,
   makeStyles,
-  // eslint-disable-next-line no-unused-vars
   Theme,
 } from '@material-ui/core';
 import { format, differenceInCalendarMonths } from 'date-fns';
@@ -13,16 +12,17 @@ import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import Month from './Month';
 import DefinedRanges from './DefinedRanges';
 import {
-  // eslint-disable-next-line no-unused-vars
   DateRange,
-  // eslint-disable-next-line no-unused-vars
   DefinedRange,
-  // eslint-disable-next-line no-unused-vars
   Setter,
-  // eslint-disable-next-line no-unused-vars
   NavigationAction,
+  Marker,
 } from '../types';
-import { MARKERS } from './DateRangePicker';
+
+export const MARKERS: { [key: string]: Marker } = {
+  FIRST_MONTH: Symbol('firstMonth'),
+  SECOND_MONTH: Symbol('secondMonth'),
+};
 
 const useStyles = makeStyles((theme: Theme) => ({
   header: {

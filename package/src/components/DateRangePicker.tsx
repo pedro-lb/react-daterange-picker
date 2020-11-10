@@ -1,4 +1,3 @@
-/* eslint-disable no-multi-assign */
 /* eslint-disable no-param-reassign */
 
 import * as React from 'react';
@@ -14,20 +13,17 @@ import {
   min,
 } from 'date-fns';
 
-// eslint-disable-next-line no-unused-vars
-import { DateRange, NavigationAction, DefinedRange } from '../types';
+import {
+  DateRange,
+  NavigationAction,
+  DefinedRange,
+  Marker,
+} from '../types';
 import { getValidatedMonths, parseOptionalDate } from '../utils';
 
 import { defaultRanges } from '../defaults';
 
-import Menu from './Menu';
-
-type Marker = symbol;
-
-export const MARKERS: { [key: string]: Marker } = {
-  FIRST_MONTH: Symbol('firstMonth'),
-  SECOND_MONTH: Symbol('secondMonth'),
-};
+import Menu, { MARKERS } from './Menu';
 
 interface DateRangePickerProps {
   open: boolean;
@@ -54,7 +50,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
   const maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
-  const [intialFirstMonth, initialSecondMonth] = getValidatedMonths(
+  const [initialFirstMonth, initialSecondMonth] = getValidatedMonths(
     initialDateRange || {},
     minDateValid,
     maxDateValid,
@@ -62,7 +58,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
 
   const [dateRange, setDateRange] = React.useState<DateRange>({ ...initialDateRange });
   const [hoverDay, setHoverDay] = React.useState<Date>();
-  const [firstMonth, setFirstMonth] = React.useState<Date>(intialFirstMonth || today);
+  const [firstMonth, setFirstMonth] = React.useState<Date>(initialFirstMonth || today);
   const [secondMonth, setSecondMonth] = React.useState<Date>(
     initialSecondMonth || addMonths(firstMonth, 1),
   );
@@ -86,8 +82,10 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
     let { startDate: newStart, endDate: newEnd } = range;
 
     if (newStart && newEnd) {
-      range.startDate = newStart = max(newStart, minDateValid);
-      range.endDate = newEnd = min(newEnd, maxDateValid);
+      newStart = max(newStart, minDateValid);
+      newEnd = min(newEnd, maxDateValid);
+      range.startDate = newStart;
+      range.endDate = newEnd;
 
       setDateRange(range);
       onChange(range);

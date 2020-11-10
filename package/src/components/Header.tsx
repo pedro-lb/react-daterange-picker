@@ -1,5 +1,3 @@
-/* eslint-disable radix */
-
 import {
   Grid,
   makeStyles,
@@ -7,7 +5,7 @@ import {
   Select,
   MenuItem,
 } from '@material-ui/core';
-import React from 'react';
+import * as React from 'react';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import {
@@ -70,12 +68,12 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 }: HeaderProps) => {
   const classes = useStyles();
 
-  const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDate(setMonth(date, parseInt(event.target.value)));
+  const handleMonthChange = (event: React.ChangeEvent<{ name?: string | undefined; value: unknown; }>) => {
+    setDate(setMonth(date, parseInt(event.target.value as string, 10)));
   };
 
-  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDate(setYear(date, parseInt(event.target.value)));
+  const handleYearChange = (event: React.ChangeEvent<{ name?: string | undefined; value: unknown; }>) => {
+    setDate(setYear(date, parseInt(event.target.value as string, 10)));
   };
 
   return (
@@ -116,7 +114,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           ))}
         </Select>
 
-        {/* <Typography>{format(date, "MMMM YYYY")}</Typography> */}
       </Grid>
       <Grid item className={classes.iconContainer}>
         <IconButton className={classes.icon} disabled={nextDisabled} onClick={onClickNext}>
