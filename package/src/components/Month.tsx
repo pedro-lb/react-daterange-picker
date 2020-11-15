@@ -1,16 +1,11 @@
 import * as React from 'react';
-import {
-  Paper,
-  Grid,
-  Typography,
-  makeStyles,
-} from '@material-ui/core';
+import { Paper, Grid, Typography, makeStyles } from '@material-ui/core';
 import {
   getDate,
   isSameMonth,
   isToday,
   format,
-  isWithinRange,
+  isWithinInterval,
 } from 'date-fns';
 import {
   chunks,
@@ -87,8 +82,12 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           setDate={setDate}
           nextDisabled={!forward}
           prevDisabled={!back}
-          onClickPrevious={() => handlers.onMonthNavigate(marker, NavigationAction.Previous)}
-          onClickNext={() => handlers.onMonthNavigate(marker, NavigationAction.Next)}
+          onClickPrevious={() =>
+            handlers.onMonthNavigate(marker, NavigationAction.Previous)
+          }
+          onClickNext={() =>
+            handlers.onMonthNavigate(marker, NavigationAction.Next)
+          }
         />
 
         <Grid
@@ -98,7 +97,7 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           justify="space-between"
           className={classes.weekDaysContainer}
         >
-          {WEEK_DAYS.map((day) => (
+          {WEEK_DAYS.map(day => (
             <Typography color="textSecondary" key={day} variant="caption">
               {day}
             </Typography>
@@ -113,12 +112,18 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           className={classes.daysContainer}
         >
           {chunks(getDaysInMonth(date), 7).map((week, idx) => (
-            <Grid key={idx.toString()} container direction="row" justify="center">
-              {week.map((day) => {
+            <Grid
+              key={idx.toString()}
+              container
+              direction="row"
+              justify="center"
+            >
+              {week.map(day => {
                 const isStart = isStartOfRange(dateRange, day);
                 const isEnd = isEndOfRange(dateRange, day);
                 const isRangeOneDay = isRangeSameDay(dateRange);
-                const highlighted = inDateRange(dateRange, day) || helpers.inHoverRange(day);
+                const highlighted =
+                  inDateRange(dateRange, day) || helpers.inHoverRange(day);
 
                 return (
                   <Day
@@ -127,8 +132,11 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
                     outlined={isToday(day)}
                     highlighted={highlighted && !isRangeOneDay}
                     disabled={
-                      !isSameMonth(date, day)
-                      || !isWithinRange(day, minDate, maxDate)
+                      !isSameMonth(date, day) ||
+                      !isWithinInterval(day, {
+                        start: minDate,
+                        end: maxDate,
+                      })
                     }
                     startOfRange={isStart && !isRangeOneDay}
                     endOfRange={isEnd && !isRangeOneDay}

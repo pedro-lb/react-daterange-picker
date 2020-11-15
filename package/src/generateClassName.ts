@@ -1,3 +1,4 @@
+import { GenerateId } from 'jss';
 /* eslint-disable no-console */
 
 // Returns a function which generates unique class names based on counters.
@@ -12,7 +13,7 @@ let ruleCounter = 0;
 // Adds a prefix to all generated class names, to avoid conflict with other Material UI instances.
 const prefix = 'materialui-daterange-picker';
 
-export default function generateClassName(rule: any, sheet: any) {
+const generateClassName: GenerateId = (rule, sheet) => {
   ruleCounter += 1;
 
   if (ruleCounter > 1e10) {
@@ -20,7 +21,7 @@ export default function generateClassName(rule: any, sheet: any) {
       [
         'Material-UI: you might have a memory leak.',
         'The ruleCounter is not supposed to grow that much.',
-      ].join(''),
+      ].join('')
     );
   }
 
@@ -29,4 +30,6 @@ export default function generateClassName(rule: any, sheet: any) {
   }
 
   return `${prefix}-${rule.key}-${ruleCounter}`;
-}
+};
+
+export default generateClassName;

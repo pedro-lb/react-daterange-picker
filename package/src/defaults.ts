@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 import {
   addDays,
   startOfWeek,
@@ -50,4 +48,6 @@ const getDefaultRanges = (date: Date): DefinedRange[] => [
   },
 ];
 
-export const defaultRanges = getDefaultRanges(new Date());
+const defaultRanges = getDefaultRanges(new Date());
+
+export default defaultRanges;

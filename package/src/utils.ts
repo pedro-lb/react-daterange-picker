@@ -6,13 +6,14 @@ import {
   isBefore,
   addDays,
   isSameDay,
-  isWithinRange,
+  isWithinInterval,
   isSameMonth,
   addMonths,
-  parse,
   isValid,
   min,
   max,
+  parseISO,
+  toDate,
 } from 'date-fns';
 
 import { DateRange } from './types';
@@ -48,7 +49,7 @@ export const isEndOfRange = ({ endDate }: DateRange, day: Date) =>
 export const inDateRange = ({ startDate, endDate }: DateRange, day: Date) =>
   (startDate &&
     endDate &&
-    (isWithinRange(day, startDate, endDate) ||
+    (isWithinInterval(day, { start: startDate, end: endDate }) ||
       isSameDay(day, startDate) ||
       isSameDay(day, endDate))) as boolean;
 
@@ -66,7 +67,9 @@ export const parseOptionalDate = (
   defaultValue: Date
 ) => {
   if (date) {
-    const parsed = parse(date);
+    let parsed: Date;
+    if (typeof date === 'string') parsed = parseISO(date);
+    else parsed = toDate(date);
     if (isValid(parsed)) return parsed;
   }
   return defaultValue;
@@ -79,8 +82,8 @@ export const getValidatedMonths = (
 ) => {
   const { startDate, endDate } = range;
   if (startDate && endDate) {
-    const newStart = max(startDate, minDate);
-    const newEnd = min(endDate, maxDate);
+    const newStart = max([startDate, minDate]);
+    const newEnd = min([endDate, maxDate]);
 
     return [
       newStart,

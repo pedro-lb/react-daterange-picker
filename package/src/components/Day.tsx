@@ -1,12 +1,7 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 
 import * as React from 'react';
-import {
-  IconButton,
-  Typography,
-  makeStyles,
-  Theme,
-} from '@material-ui/core';
+import { IconButton, Typography, makeStyles, Theme } from '@material-ui/core';
 import { combine } from '../utils';
 
 const useStyles = makeStyles((theme: Theme) => ({

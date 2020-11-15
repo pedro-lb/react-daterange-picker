@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   Paper,
   Grid,
@@ -76,9 +76,14 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
   } = props;
 
   const { startDate, endDate } = dateRange;
-  const canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
+  const canNavigateCloser =
+    differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = {
-    dateRange, minDate, maxDate, helpers, handlers,
+    dateRange,
+    minDate,
+    maxDate,
+    helpers,
+    handlers,
   };
   return (
     <Paper elevation={5} square>

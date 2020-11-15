@@ -29,6 +29,7 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-props-no-spreading': 0,
+    'react/jsx-curly-newline': 0,
     'react/require-default-props': 0,
     'import/extensions': 0,
     'no-use-before-define': 'off',
