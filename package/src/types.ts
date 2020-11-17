@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-
 import * as React from 'react';
 
 export interface DateRange {

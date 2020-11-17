@@ -27,6 +27,8 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
+    'no-shadow': "off",
+    "@typescript-eslint/no-shadow": "error",
     'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
     'react/jsx-props-no-spreading': 0,
     'react/jsx-curly-newline': 0,
