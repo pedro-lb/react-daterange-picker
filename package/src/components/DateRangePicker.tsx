@@ -18,7 +18,7 @@ import {
 import { DateRange, NavigationAction, DefinedRange } from '../types';
 import { getValidatedMonths, parseOptionalDate } from '../utils';
 
-import { defaultRanges } from '../defaults';
+import { defaultRanges, defaultMenuProps } from '../defaults';
 
 import Menu from './Menu';
 
@@ -36,6 +36,10 @@ interface DateRangePickerProps {
   minDate?: Date | string;
   maxDate?: Date | string;
   onChange: (dateRange: DateRange) => void;
+  MenuProps?: {
+    disablePortal: boolean,
+    anchorEl?: Node
+  }
 }
 
 const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
@@ -50,6 +54,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
     minDate,
     maxDate,
     definedRanges = defaultRanges,
+    MenuProps = defaultMenuProps
   } = props;
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
@@ -164,6 +169,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
       setDateRange={setDateRangeValidated}
       helpers={helpers}
       handlers={handlers}
+      MenuProps={MenuProps}
     />
   ) : null;
 };

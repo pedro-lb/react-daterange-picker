@@ -56,6 +56,10 @@ interface MenuProps {
     onDayHover: (day: Date) => void;
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
+  MenuProps: {
+    disablePortal: boolean,
+    anchorEl?: Node
+  }
 }
 
 const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
@@ -73,12 +77,13 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     setDateRange,
     helpers,
     handlers,
+    MenuProps
   } = props;
 
   const { startDate, endDate } = dateRange;
   const canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = {
-    dateRange, minDate, maxDate, helpers, handlers,
+    dateRange, minDate, maxDate, helpers, handlers, MenuProps
   };
   return (
     <Paper elevation={5} square>
