@@ -52,7 +52,7 @@ const getDefaultRanges = (date: Date): DefinedRange[] => [
 ];
 
 export const defaultMenuProps = {
-  disablePortal: true
-}
+  disablePortal: true,
+};
 
 export const defaultRanges = getDefaultRanges(new Date());

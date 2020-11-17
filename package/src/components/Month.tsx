@@ -23,7 +23,6 @@ import {
 import Header from './Header';
 import Day from './Day';
 
-
 // eslint-disable-next-line no-unused-vars
 import { NavigationAction, DateRange } from '../types';
 
@@ -80,7 +79,7 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
     setValue: setDate,
     minDate,
     maxDate,
-    MenuProps
+    MenuProps,
   } = props;
 
   // eslint-disable-next-line react/destructuring-assignment

@@ -77,13 +77,13 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     setDateRange,
     helpers,
     handlers,
-    MenuProps
+    MenuProps,
   } = props;
 
   const { startDate, endDate } = dateRange;
   const canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = {
-    dateRange, minDate, maxDate, helpers, handlers, MenuProps
+    dateRange, minDate, maxDate, helpers, handlers, MenuProps,
   };
   return (
     <Paper elevation={5} square>

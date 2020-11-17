@@ -68,7 +68,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   prevDisabled,
   onClickNext,
   onClickPrevious,
-  MenuProps
+  MenuProps,
 }: HeaderProps) => {
   const classes = useStyles();
 
