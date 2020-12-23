@@ -20,6 +20,7 @@
 	},
 	"peerDependencies": {
 		"@material-ui/core": "^4.9.4",
+		"@material-ui/icons": "^4.9.1",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6"
 	},
@@ -71,8 +72,6 @@
 		"typescript": "^3.7.5"
 	},
 	"dependencies": {
-		"@material-ui/core": "^4.9.4",
-		"@material-ui/icons": "^4.9.1",
 		"classnames": "^2.2.6",
 		"date-fns": "^1.30.1"
 	},
