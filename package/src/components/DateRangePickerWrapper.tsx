@@ -68,7 +68,7 @@ const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProp
   return (
     <div className={classes.dateRangePickerContainer}>
       {
-        open && (
+        open && closeOnClickOutside && (
           <div
             className={classes.dateRangeBackdrop}
             onKeyPress={handleKeyPress}
