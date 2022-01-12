@@ -23,7 +23,6 @@ import {
 import Header from './Header';
 import Day from './Day';
 
-
 // eslint-disable-next-line no-unused-vars
 import { NavigationAction, DateRange } from '../types';
 
@@ -62,6 +61,10 @@ interface MonthProps {
     onDayHover: (day: Date) => void;
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
+  MenuProps: {
+    disablePortal: boolean,
+    anchorEl?: Node
+  }
 }
 
 const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
@@ -76,6 +79,7 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
     setValue: setDate,
     minDate,
     maxDate,
+    MenuProps,
   } = props;
 
   // eslint-disable-next-line react/destructuring-assignment
@@ -91,6 +95,7 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           prevDisabled={!back}
           onClickPrevious={() => handlers.onMonthNavigate(marker, NavigationAction.Previous)}
           onClickNext={() => handlers.onMonthNavigate(marker, NavigationAction.Next)}
+          MenuProps={MenuProps}
         />
 
         <Grid
