@@ -1,15 +1,14 @@
 /* eslint-disable radix */
 
 import {
-  Grid,
-  makeStyles,
-  IconButton,
-  Select,
-  MenuItem,
-} from '@material-ui/core';
+  Grid, IconButton, MenuItem,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+// eslint-disable-next-line no-unused-vars
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import React from 'react';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
+import ChevronLeft from '@mui/icons-material/ChevronLeft';
+import ChevronRight from '@mui/icons-material/ChevronRight';
 import {
   setMonth,
   getMonth,
@@ -17,11 +16,19 @@ import {
   getYear,
 } from 'date-fns';
 
-const useStyles = makeStyles(() => ({
-  iconContainer: {
+const PREFIX = 'Header';
+
+const classes = {
+  iconContainer: `${PREFIX}-iconContainer`,
+  icon: `${PREFIX}-icon`,
+};
+
+const StyledGrid = styled(Grid)(() => ({
+  [`& .${classes.iconContainer}`]: {
     padding: 5,
   },
-  icon: {
+
+  [`& .${classes.icon}`]: {
     padding: 10,
     '&:hover': {
       background: 'none',
@@ -68,29 +75,29 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   onClickNext,
   onClickPrevious,
 }: HeaderProps) => {
-  const classes = useStyles();
-
-  const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDate(setMonth(date, parseInt(event.target.value)));
+  const handleMonthChange = (event: SelectChangeEvent<number>) => {
+    setDate(setMonth(date, parseInt(event.target.value.toString())));
   };
 
-  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDate(setYear(date, parseInt(event.target.value)));
+  const handleYearChange = (event: SelectChangeEvent<number>) => {
+    setDate(setYear(date, parseInt(event.target.value.toString())));
   };
 
   return (
-    <Grid container justifyContent="space-between" alignItems="center">
+    <StyledGrid container justifyContent="space-between" alignItems="center">
       <Grid item className={classes.iconContainer}>
         <IconButton
           className={classes.icon}
           disabled={prevDisabled}
           onClick={onClickPrevious}
+          size="large"
         >
           <ChevronLeft color={prevDisabled ? 'disabled' : 'action'} />
         </IconButton>
       </Grid>
       <Grid item>
         <Select
+          variant="standard"
           value={getMonth(date)}
           onChange={handleMonthChange}
           MenuProps={{ disablePortal: true }}
@@ -105,6 +112,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 
       <Grid item>
         <Select
+          variant="standard"
           value={getYear(date)}
           onChange={handleYearChange}
           MenuProps={{ disablePortal: true }}
@@ -119,11 +127,16 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         {/* <Typography>{format(date, "MMMM YYYY")}</Typography> */}
       </Grid>
       <Grid item className={classes.iconContainer}>
-        <IconButton className={classes.icon} disabled={nextDisabled} onClick={onClickNext}>
+        <IconButton
+          className={classes.icon}
+          disabled={nextDisabled}
+          onClick={onClickNext}
+          size="large"
+        >
           <ChevronRight color={nextDisabled ? 'disabled' : 'action'} />
         </IconButton>
       </Grid>
-    </Grid>
+    </StyledGrid>
   );
 };
 

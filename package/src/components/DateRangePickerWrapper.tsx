@@ -1,23 +1,33 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import * as React from 'react';
+import { styled } from '@mui/material/styles';
 import classNames from 'classnames';
-import { makeStyles } from '@material-ui/core';
 
 import DateRangePicker from './DateRangePicker';
 
 // eslint-disable-next-line no-unused-vars
 import { DateRange, DefinedRange } from '../types';
 
-const useStyles = makeStyles(() => ({
-  dateRangePickerContainer: {
+const PREFIX = 'DateRangePickerWrapper';
+
+const classes = {
+  dateRangePickerContainer: `${PREFIX}-dateRangePickerContainer`,
+  dateRangePicker: `${PREFIX}-dateRangePicker`,
+  dateRangeBackdrop: `${PREFIX}-dateRangeBackdrop`,
+};
+
+const Root = styled('div')(() => ({
+  [`&.${classes.dateRangePickerContainer}`]: {
     position: 'relative',
   },
-  dateRangePicker: {
+
+  [`& .${classes.dateRangePicker}`]: {
     position: 'relative',
     zIndex: 1,
   },
-  dateRangeBackdrop: {
+
+  [`& .${classes.dateRangeBackdrop}`]: {
     position: 'fixed',
     height: '100vh',
     width: '100vw',
@@ -44,8 +54,6 @@ export interface DateRangePickerWrapperProps {
 const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProps> = (
   props: DateRangePickerWrapperProps,
 ) => {
-  const classes = useStyles();
-
   const {
     closeOnClickOutside,
     wrapperClassName,
@@ -66,7 +74,7 @@ const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProp
   const wrapperClasses = classNames(classes.dateRangePicker, wrapperClassName);
 
   return (
-    <div className={classes.dateRangePickerContainer}>
+    <Root className={classes.dateRangePickerContainer}>
       {
         open && (
           <div
@@ -80,7 +88,7 @@ const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProp
       <div className={wrapperClasses}>
         <DateRangePicker {...props} />
       </div>
-    </div>
+    </Root>
   );
 };
 

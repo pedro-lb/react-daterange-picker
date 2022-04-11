@@ -1,48 +1,53 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 
 import * as React from 'react';
+import { styled } from '@mui/material/styles';
 import {
-  IconButton,
-  Typography,
-  makeStyles,
-  // eslint-disable-next-line no-unused-vars
-  Theme,
-} from '@material-ui/core';
-import { combine } from '../utils';
+  Box, IconButton, Typography, // eslint-disable-next-line no-unused-vars
+} from '@mui/material';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  leftBorderRadius: {
+const Root = styled(Box)<{
+  leftBorderRadius?: boolean;
+  rightBorderRadius?: boolean;
+  highlighted?: boolean;
+}>(({
+  theme, leftBorderRadius, rightBorderRadius, highlighted,
+}) => ({
+  ...(leftBorderRadius && {
     borderRadius: '50% 0 0 50%',
-  },
-  rightBorderRadius: {
+  }),
+  ...(rightBorderRadius && {
     borderRadius: '0 50% 50% 0',
-  },
-  buttonContainer: {
-    display: 'flex',
-  },
-  button: {
-    height: 36,
-    width: 36,
-    padding: 0,
-  },
-  buttonText: {
-    lineHeight: 1.6,
-  },
-  outlined: {
+  }),
+  display: 'flex',
+  ...(highlighted && {
+    backgroundColor: theme.palette.action.hover,
+  }),
+}));
+
+const StyledIconButton = styled(IconButton)<{
+  outlined?: boolean;
+  filled?: boolean;
+}>(({ theme, outlined, filled }) => ({
+  height: 36,
+  width: 36,
+  padding: 0,
+  ...(outlined && {
     border: `1px solid ${theme.palette.primary.dark}`,
-  },
-  filled: {
+  }),
+  ...(filled && {
     '&:hover': {
       backgroundColor: theme.palette.primary.dark,
     },
     backgroundColor: theme.palette.primary.dark,
-  },
-  highlighted: {
-    backgroundColor: theme.palette.action.hover,
-  },
-  contrast: {
+  }),
+}));
+
+const StyledTypography = styled(Typography)<{contrast?:boolean;}>(({ theme, contrast }) => ({
+  lineHeight: 1.6,
+  ...(contrast && {
     color: theme.palette.primary.contrastText,
-  },
+  }),
 }));
 
 interface DayProps {
@@ -67,41 +72,29 @@ const Day: React.FunctionComponent<DayProps> = ({
   onClick,
   onHover,
   value,
-}: DayProps) => {
-  const classes = useStyles();
-
-  return (
-    <div
-      className={combine(
-        classes.buttonContainer,
-        startOfRange && classes.leftBorderRadius,
-        endOfRange && classes.rightBorderRadius,
-        !disabled && highlighted && classes.highlighted,
-      )}
+}: DayProps) => (
+  <Root
+    leftBorderRadius={startOfRange}
+    rightBorderRadius={endOfRange}
+    highlighted={!disabled && highlighted}
+  >
+    <StyledIconButton
+      outlined={!disabled && outlined}
+      filled={!disabled && filled}
+      disabled={disabled}
+      onClick={onClick}
+      onMouseOver={onHover}
+      size="large"
     >
-      <IconButton
-        className={combine(
-          classes.button,
-          !disabled && outlined && classes.outlined,
-          !disabled && filled && classes.filled,
-        )}
-        disabled={disabled}
-        onClick={onClick}
-        onMouseOver={onHover}
+      <StyledTypography
+        color={!disabled ? 'textPrimary' : 'textSecondary'}
+        contrast={!disabled && filled}
+        variant="body2"
       >
-        <Typography
-          color={!disabled ? 'textPrimary' : 'textSecondary'}
-          className={combine(
-            classes.buttonText,
-            !disabled && filled && classes.contrast,
-          )}
-          variant="body2"
-        >
-          {value}
-        </Typography>
-      </IconButton>
-    </div>
-  );
-};
+        {value}
+      </StyledTypography>
+    </StyledIconButton>
+  </Root>
+);
 
 export default Day;

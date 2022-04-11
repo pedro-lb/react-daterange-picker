@@ -1,10 +1,6 @@
 import * as React from 'react';
-import {
-  Paper,
-  Grid,
-  Typography,
-  makeStyles,
-} from '@material-ui/core';
+import { styled } from '@mui/material/styles';
+import { Paper, Grid, Typography } from '@mui/material';
 import {
   getDate,
   isSameMonth,
@@ -27,24 +23,34 @@ import Day from './Day';
 // eslint-disable-next-line no-unused-vars
 import { NavigationAction, DateRange } from '../types';
 
-const WEEK_DAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+const PREFIX = 'Month';
 
-const useStyles = makeStyles(() => ({
-  root: {
+const classes = {
+  root: `${PREFIX}-root`,
+  weekDaysContainer: `${PREFIX}-weekDaysContainer`,
+  daysContainer: `${PREFIX}-daysContainer`,
+};
+
+const StyledPaper = styled(Paper)(() => ({
+  [`&.${classes.root}`]: {
     width: 290,
   },
-  weekDaysContainer: {
+
+  [`& .${classes.weekDaysContainer}`]: {
     marginTop: 10,
     paddingLeft: 30,
     paddingRight: 30,
   },
-  daysContainer: {
+
+  [`& .${classes.daysContainer}`]: {
     paddingLeft: 15,
     paddingRight: 15,
     marginTop: 15,
     marginBottom: 20,
   },
 }));
+
+const WEEK_DAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 interface MonthProps {
   value: Date;
@@ -65,8 +71,6 @@ interface MonthProps {
 }
 
 const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
-  const classes = useStyles();
-
   const {
     helpers,
     handlers,
@@ -82,7 +86,7 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
   const [back, forward] = props.navState;
 
   return (
-    <Paper square elevation={0} className={classes.root}>
+    <StyledPaper square elevation={0} className={classes.root}>
       <Grid container>
         <Header
           date={date}
@@ -145,7 +149,7 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           ))}
         </Grid>
       </Grid>
-    </Paper>
+    </StyledPaper>
   );
 };
 

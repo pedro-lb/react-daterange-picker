@@ -1,15 +1,14 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import {
   Paper,
   Grid,
   Typography,
   Divider,
-  makeStyles,
   // eslint-disable-next-line no-unused-vars
-  Theme,
-} from '@material-ui/core';
+} from '@mui/material';
 import { format, differenceInCalendarMonths } from 'date-fns';
-import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
+import ArrowRightAlt from '@mui/icons-material/ArrowRightAlt';
 import Month from './Month';
 import DefinedRanges from './DefinedRanges';
 import {
@@ -24,15 +23,25 @@ import {
 } from '../types';
 import { MARKERS } from './DateRangePicker';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  header: {
+const PREFIX = 'Menu';
+
+const classes = {
+  header: `${PREFIX}-header`,
+  headerItem: `${PREFIX}-headerItem`,
+  divider: `${PREFIX}-divider`,
+};
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  [`& .${classes.header}`]: {
     padding: '20px 70px',
   },
-  headerItem: {
+
+  [`& .${classes.headerItem}`]: {
     flex: 1,
     textAlign: 'center',
   },
-  divider: {
+
+  [`& .${classes.divider}`]: {
     borderLeft: `1px solid ${theme.palette.action.hover}`,
     marginBottom: 20,
   },
@@ -59,8 +68,6 @@ interface MenuProps {
 }
 
 const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
-  const classes = useStyles();
-
   const {
     ranges,
     dateRange,
@@ -81,7 +88,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     dateRange, minDate, maxDate, helpers, handlers,
   };
   return (
-    <Paper elevation={5} square>
+    <StyledPaper elevation={5} square>
       <Grid container direction="row" wrap="nowrap">
         <Grid>
           <Grid container className={classes.header} alignItems="center">
@@ -127,7 +134,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
           />
         </Grid>
       </Grid>
-    </Paper>
+    </StyledPaper>
   );
 };
 

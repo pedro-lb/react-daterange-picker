@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StylesProvider } from '@material-ui/core/styles';
+import StylesProvider from '@mui/styles/StylesProvider';
 
 // eslint-disable-next-line no-unused-vars
 import DateRangePickerWrapper, { DateRangePickerWrapperProps } from './DateRangePickerWrapper';
