@@ -97,7 +97,7 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           item
           container
           direction="row"
-          justify="space-between"
+          justifyContent="space-between"
           className={classes.weekDaysContainer}
         >
           {WEEK_DAYS.map((day) => (
@@ -111,12 +111,12 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           item
           container
           direction="column"
-          justify="space-between"
+          justifyContent="space-between"
           className={classes.daysContainer}
         >
           {chunks(getDaysInMonth(date), 7).map((week, idx) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Grid key={idx} container direction="row" justify="center">
+            <Grid key={idx} container direction="row" justifyContent="center">
               {week.map((day) => {
                 const isStart = isStartOfRange(dateRange, day);
                 const isEnd = isEndOfRange(dateRange, day);

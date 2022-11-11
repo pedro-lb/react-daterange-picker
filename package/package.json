@@ -1,10 +1,10 @@
 {
 	"name": "materialui-daterange-picker",
-	"version": "1.1.92",
+	"version": "1.1.93",
 	"description": "A react date range picker implementation using @material-ui.",
-	"author": "pedro-lb",
+	"author": "jungsoft",
 	"license": "MIT",
-	"repository": "pedro-lb/materialui-daterange-picker",
+	"repository": "jungsoft/materialui-daterange-picker",
 	"main": "dist/index.js",
 	"module": "dist/index.es.js",
 	"jsnext:main": "dist/index.es.js",
@@ -20,9 +20,8 @@
 	},
 	"peerDependencies": {
 		"@material-ui/core": "^4.9.4",
-		"@material-ui/icons": "^4.9.1",
-		"react": "^16.8.6",
-		"react-dom": "^16.8.6"
+		"react": "^16.8.6 || ^17.0.0",
+		"react-dom": "^16.8.6 || ^17.0.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.0.0",
@@ -59,8 +58,8 @@
 		"eslint-plugin-jsx-a11y": "^6.2.3",
 		"eslint-plugin-react": "^7.18.3",
 		"eslint-plugin-react-hooks": "^1.7.0",
-		"react": "16.8.6",
-		"react-dom": "16.8.6",
+		"react": "16.8.6 || ^17.0.0",
+		"react-dom": "16.8.6 || ^17.0.0",
 		"react-scripts": "^3.0.1",
 		"rollup": "^1.1.2",
 		"rollup-plugin-babel": "^4.3.2",
